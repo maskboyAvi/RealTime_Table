@@ -1,0 +1,130 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f7f6;
+    margin: 0;
+    padding: 0;
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+}
+
+.table-container {
+    width: 80%;
+    margin: 20px auto;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #e0e0e0; /* Light grey for the header background */
+    color: #333;
+    text-transform: uppercase;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+tr td {
+    transition: background-color 0.3s ease;
+}
+
+tr td.failed-row {
+    background-color: #ffe6e6; /* Light red background for failed rows */
+}
+
+tr td.done-row {
+    background-color: #e6ffe6; /* Light green background for done rows */
+}
+
+.progress-container {
+    width: 80%;
+    margin: 20px auto;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+progress {
+    width: 100%;
+    height: 20px;
+    border-radius: 8px;
+    border: none;
+    overflow: hidden;
+}
+
+progress[value] {
+    appearance: none;
+}
+
+progress[value]::-webkit-progress-bar {
+    background-color: #ddd;
+    border-radius: 8px;
+}
+
+progress[value]::-webkit-progress-value {
+    border-radius: 8px;
+}
+
+.failed {
+    background-color: #f44336; /* Red for failed progress */
+}
+
+.done {
+    background-color: #4CAF50; /* Green for done progress */
+}
+
+button {
+    background-color: #007BFF; /* Bootstrap-like primary button color */
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    margin: 5px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+input[type="number"],
+input[type="text"] {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 5px;
+    width: 150px;
+    font-size: 14px;
+    transition: border 0.3s ease;
+}
+
+input[type="number"]:focus,
+input[type="text"]:focus {
+    border: 1px solid #007BFF;
+    outline: none;
+}
