@@ -13,7 +13,7 @@ const Table = ({ searchQuery }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage] = useState(10);
   const [sortConfig, setSortConfig] = useState({ key: null, direction: null });
-  const [socket, setSocket] = useState(null);
+  const [, setSocket] = useState(null);
   const [goToPage, setGoToPage] = useState("");
 
   // Fetch rows for the current page from the backend
@@ -119,26 +119,33 @@ const Table = ({ searchQuery }) => {
     }
   };
 
-  // Initial data fetch and WebSocket setup
   useEffect(() => {
     fetchRows(currentPage, sortConfig.key, sortConfig.direction);
     fetchTotalRowCount();
-
+  
     const ws = new WebSocket("ws://localhost:4000");
     setSocket(ws);
-
+  
     ws.onmessage = (event) => {
       const message = JSON.parse(event.data);
       if (message.type === "update") {
+        // Fetch updated rows and total count when a new row is added
         fetchRows(currentPage, sortConfig.key, sortConfig.direction);
+        fetchTotalRowCount();
+  
+        // If the current page is the last page, ensure new pages are reflected
+        const totalPages = Math.ceil(totalRowCount / rowsPerPage);
+        if (currentPage > totalPages) {
+          setCurrentPage(totalPages); // Adjust current page to the last available page
+        }
       }
     };
-
+  
     ws.onclose = () => console.log("WebSocket disconnected");
-
+  
     return () => ws.close();
-  }, [currentPage, sortConfig]);
-
+  }, [currentPage, sortConfig, rowsPerPage, totalRowCount]);
+  
   // Calculate progress bars
   useEffect(() => {
     const doneCount = rows.filter((row) => row.status === "Done").length;
